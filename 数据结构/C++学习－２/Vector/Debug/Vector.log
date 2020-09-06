@@ -1,0 +1,9 @@
+﻿  Vector.cpp
+E:\文件集\C语言\数据结构\C++中类的声明和定义\Vector\Vector.cpp(12,21): warning C4018: “<”: 有符号/无符号不匹配
+E:\文件集\C语言\数据结构\C++中类的声明和定义\Vector\Vector.cpp(20,20): warning C4018: “<”: 有符号/无符号不匹配
+E:\文件集\C语言\数据结构\C++中类的声明和定义\Vector\Vector.cpp(28,21): warning C4018: “<”: 有符号/无符号不匹配
+E:\文件集\C语言\数据结构\C++中类的声明和定义\Vector\Vector.cpp(36,21): warning C4018: “<”: 有符号/无符号不匹配
+E:\文件集\C语言\数据结构\C++中类的声明和定义\Vector\Vector.cpp(44,21): warning C4018: “<”: 有符号/无符号不匹配
+E:\文件集\C语言\数据结构\C++中类的声明和定义\Vector\Vector.cpp(53,21): warning C4018: “<”: 有符号/无符号不匹配
+E:\文件集\C语言\数据结构\C++中类的声明和定义\Vector\Vector.cpp(60,21): warning C4018: “<”: 有符号/无符号不匹配
+  Vector.vcxproj -> E:\文件集\C语言\数据结构\C++中类的声明和定义\Debug\Vector.exe

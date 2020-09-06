@@ -1,0 +1,4 @@
+﻿D:\Software\visual studio\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(Leedcode学习.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  1两数之和.cpp
+E:\文件集\C语言\数据结构\Leedcode学习\1两数之和.cpp(70,16): error C2011: “Solution”:“class”类型重定义
+E:\文件集\C语言\数据结构\Leedcode学习\1两数之和.cpp(37): message : 参见“Solution”的声明

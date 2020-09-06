@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "拳皇", "拳皇.vcxproj", "{39DE3066-B7DC-40FE-97A4-852704FEC5BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39DE3066-B7DC-40FE-97A4-852704FEC5BD}.Debug|x64.ActiveCfg = Debug|x64
+		{39DE3066-B7DC-40FE-97A4-852704FEC5BD}.Debug|x64.Build.0 = Debug|x64
+		{39DE3066-B7DC-40FE-97A4-852704FEC5BD}.Debug|x86.ActiveCfg = Debug|Win32
+		{39DE3066-B7DC-40FE-97A4-852704FEC5BD}.Debug|x86.Build.0 = Debug|Win32
+		{39DE3066-B7DC-40FE-97A4-852704FEC5BD}.Release|x64.ActiveCfg = Release|x64
+		{39DE3066-B7DC-40FE-97A4-852704FEC5BD}.Release|x64.Build.0 = Release|x64
+		{39DE3066-B7DC-40FE-97A4-852704FEC5BD}.Release|x86.ActiveCfg = Release|Win32
+		{39DE3066-B7DC-40FE-97A4-852704FEC5BD}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26F614C2-DB2A-4805-BDCC-4424BA6680FC}
+	EndGlobalSection
+EndGlobal
