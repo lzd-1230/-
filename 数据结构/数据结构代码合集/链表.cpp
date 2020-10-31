@@ -15,18 +15,22 @@ int length_list(PNode pHead);				//求链表长度
 bool insert(PNode pHead, int pos, int val);	//在链表中插入某值 
 bool delete_list(PNode pHead, int pos);		//删除某位置上的值 
 void sort_list(PNode pHead);				//排序 
+
 int main()
 {
 	PNode pHead = nullptr;
 	pHead = creat_list();		//创建一个链表
+	/*
 	if (is_empty(pHead))
 		printf("链表为空\n");
 	sort_list(pHead);
 	insert(pHead, 2, 1230);
-	travel_list(pHead); 	//遍历链表 
+	travel_list(pHead); 	//遍历链表
 	delete_list(pHead, 2);
-	travel_list(pHead);
 	printf("链表的长度为%d\n", length_list(pHead));
+	*/
+	travel_list(pHead);
+
 	return 0;
 }
 //创建链表
@@ -39,24 +43,28 @@ PNode creat_list()
 	scanf_s("%d", &len);
 
 	PNode pHead = (PNode)malloc(sizeof(Node));	//定义一个头结点
+
 	if (pHead == nullptr)
 	{
 		printf("头结点分配失败,程序终止\n");
 		exit(-1);
 	}
-	
+
 	PNode pTail = pHead;								//初始化尾指针 
-	pTail->pNext = nullptr; 								//保证尾指针的指针域为空 
+	pTail->pNext = nullptr; 							//保证尾指针的指针域为空 
+
 	for (i = 0; i < len; i++)
 	{
 		printf("请输入第%d个节点的值", i + 1);
 		scanf_s("%d", &val);
-		PNode pNew = (PNode)malloc(sizeof(Node));		//建立新节点存储数据 
+		PNode pNew = (PNode)malloc(sizeof(Node));		//建立新节点存储数据
+
 		if (pNew == nullptr)
 		{
 			printf("头结点分配失败,程序终止\n");
 			exit(-1);
 		}
+
 		pNew->data = val;					//把输入的数据给到该节点数据域 
 		pTail->pNext = pNew;				//让pNew挂到尾节点上面 
 		pNew->pNext = nullptr;				//把pNew指针域清空,变成新的尾节点 
@@ -75,6 +83,7 @@ void travel_list(PNode pHead)
 	}
 	return;
 }
+
 bool is_empty(PNode pHead)
 {
 	if (pHead->pNext == nullptr)
@@ -117,18 +126,21 @@ void sort_list(PNode pHead)
 //在链表中插入
 bool insert(PNode pHead, int pos, int val)	//在pos前面插入val 
 {
+	int i = 0;
+	PNode p = pHead;
+
 	if (pos > length_list(pHead))
 	{
 		printf("插入的位置无效\n");
 		exit(-1);
 	}
-	int i = 0;
-	PNode p = pHead;
+	//指针移位
 	while (nullptr != p && i < pos - 1)		//在pos前面插入  
 	{
 		i++;
 		p = p->pNext;
 	}
+	//
 	if (i > pos - 1 || pHead == nullptr)
 	{
 		printf("输入的位置或链表有误,插入失败");
@@ -142,11 +154,13 @@ bool insert(PNode pHead, int pos, int val)	//在pos前面插入val
 		printf("动态内存分配失败!\n");
 		exit(-1);
 	}
+
 	tNew->pNext = q;
 	p->pNext = tNew;
 	tNew->data = val;
 	return true;
 }
+
 //删除链表中某位置的元素
 bool delete_list(PNode pHead, int pos)
 {

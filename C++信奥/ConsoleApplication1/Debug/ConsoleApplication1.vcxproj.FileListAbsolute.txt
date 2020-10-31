@@ -1,0 +1,2 @@
+E:\文件集\C语言\C++信奥\ConsoleApplication1\Debug\C++信奥.exe
+E:\文件集\C语言\C++信奥\ConsoleApplication1\Debug\C++信奥.pdb

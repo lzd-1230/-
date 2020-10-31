@@ -1,50 +1,203 @@
-#include  <stdio.h>
-#define    N    5
-typedef struct  student {
-	long  sno;
-	char  name[10];
-	float  score[3];
-} STU;
-void fun(char* filename, STU  n)
+#include<stdio.h>
+#include<malloc.h>
+#include<stdlib.h>
+#include<stdbool.h>
+typedef struct Node
 {
-	FILE* fp;
-	/**********found**********/
-	fp = fopen(filename, "rb+");
-	/**********found**********/
-	fseek(fp, -(long)sizeof(STU), SEEK_END);
-	/**********found**********/
-	fwrite(&n, sizeof(STU), 1, fp);
-	fclose(fp);
-}
+	int data;
+	struct Node* pNext;
+}Node, * PNode;				//Node等价于结构体类型 PNode等价于结构体指针类型 
+
+PNode creat_list();							//创建并初始化链表 
+void travel_list(PNode pHead);				//遍历链表 
+bool is_empty(PNode pHead);					//判断是否为空 
+int length_list(PNode pHead);				//求链表长度 
+bool insert(PNode pHead, int pos, int val);	//在链表中插入某值 
+bool delete_list(PNode pHead, int pos);		//删除某位置上的值 
+void sort_list(PNode pHead);				//排序 
+void Inverse(PNode pHead);
+
 int main()
 {
-	STU  t[N] = { {10001,"MaChao", 91, 92, 77}, {10002,"CaoKai", 75, 60, 88},
-			  {10003,"LiSi", 85, 70, 78},    {10004,"FangFang", 90, 82, 87},
-			  {10005,"ZhangSan", 95, 80, 88} };
-	STU  n = { 10006,"ZhaoSi", 55, 70, 68 }, ss[N];
-	int  i, j;      FILE* fp;
-	fp = fopen("student.dat", "wb");
-	fwrite(t, sizeof(STU), N, fp);
-	fclose(fp);
-	fp = fopen("student.dat", "rb");
-	fread(ss, sizeof(STU), N, fp);
-	fclose(fp);
-	printf("\nThe original data :\n\n");
-	for (j = 0; j < N; j++)
+	PNode pHead = nullptr;
+	pHead = creat_list();		//创建一个链表
+	/*
+	if (is_empty(pHead))
+		printf("链表为空\n");
+	sort_list(pHead);
+	insert(pHead, 2, 1230);
+	travel_list(pHead); 	//遍历链表
+	delete_list(pHead, 2);
+	printf("链表的长度为%d\n", length_list(pHead));
+	*/
+	Inverse(pHead);
+	travel_list(pHead);
+
+	return 0;
+}
+/******************************************
+遇到的问题:单向链表不能回退,不能用双指针的思想
+t相当于帮p继续往前遍历的指针!
+因为p的指针域往前指了后,就不方便
+注意最后pHead的赋值!
+*******************************************/
+void Inverse(PNode pHead)
+{
+	PNode p, q,t;
+	p = pHead->pNext;			//首结点
+	t = p;					
+	q = NULL;						
+	pHead->pNext = NULL;		//头结点指针域清空
+
+	while (t != NULL)
 	{
-		printf("\nNo: %ld  Name: %-8s      Scores:  ", ss[j].sno, ss[j].name);
-		for (i = 0; i < 3; i++)  printf("%6.2f ", ss[j].score[i]);
-		printf("\n");
+		t = t->pNext;			
+		p->pNext = q;			
+		q = p;					
+		p = t;				
 	}
-	fun("student.dat", n);
-	printf("\nThe data after modifing :\n\n");
-	fp = fopen("student.dat", "rb");
-	fread(ss, sizeof(STU), N, fp);
-	fclose(fp);
-	for (j = 0; j < N; j++)
+	pHead->pNext = q;
+}
+//创建链表
+PNode creat_list()
+{
+	int i;
+	int len;			//用来存放有效节点的个数 
+	int val;			//用来临时存放输入的数据域的值 
+	printf("请输入链表的节点数:len=");
+	scanf_s("%d", &len);
+
+	PNode pHead = (PNode)malloc(sizeof(Node));	//定义一个头结点
+
+	if (pHead == nullptr)
 	{
-		printf("\nNo: %ld  Name: %-8s      Scores:  ", ss[j].sno, ss[j].name);
-		for (i = 0; i < 3; i++)  printf("%6.2f ", ss[j].score[i]);
-		printf("\n");
+		printf("头结点分配失败,程序终止\n");
+		exit(-1);
 	}
+
+	PNode pTail = pHead;								//初始化尾指针 
+	pTail->pNext = nullptr; 							//保证尾指针的指针域为空 
+
+	for (i = 0; i < len; i++)
+	{
+		printf("请输入第%d个节点的值", i + 1);
+		scanf_s("%d", &val);
+		PNode pNew = (PNode)malloc(sizeof(Node));		//建立新节点存储数据
+
+		if (pNew == nullptr)
+		{
+			printf("头结点分配失败,程序终止\n");
+			exit(-1);
+		}
+
+		pNew->data = val;					//把输入的数据给到该节点数据域 
+		pTail->pNext = pNew;				//让pNew挂到尾节点上面 
+		pNew->pNext = nullptr;				//把pNew指针域清空,变成新的尾节点 
+		pTail = pNew; 					//每次的pNew对下一个节点来说都是尾节点 
+	}
+	return pHead;						//别忘记返回creat出来的pHead 
+}
+//遍历链表 
+void travel_list(PNode pHead)
+{
+	PNode P = pHead->pNext;				//P中存放的是首节点的地址		
+	while (P != nullptr)						//注意区分,不是P->pNext!=nullptr 
+	{
+		printf("%d\n", P->data);
+		P = P->pNext;						//让P指向下一个节点 
+	}
+	return;
+}
+
+bool is_empty(PNode pHead)
+{
+	if (pHead->pNext == nullptr)
+		return true;
+	else
+		return false;
+}
+//求链表长度 
+int length_list(PNode pHead)
+{
+	int cnt = 0;
+	PNode P = pHead->pNext;			//首节点开始 
+	while (P != nullptr)
+	{
+		cnt++;
+		P = P->pNext;
+	}
+	return cnt;
+}
+//在链表排序 
+void sort_list(PNode pHead)
+{
+	int len = length_list(pHead);
+	PNode P, Q;
+	P = pHead;
+	int i, j, t;
+	for (i = 0, P = P->pNext; i < len - 1; i++, P = P->pNext)		//除了中间的条件不动外,两边多一条翻译 
+	{
+		for (Q = P->pNext, j = i + 1; j < len; j++, Q = Q->pNext)
+		{
+			if (Q->data > P->data)						//后面不能比前面大,固降序 
+			{
+				t = P->data;
+				P->data = Q->data;
+				Q->data = t;
+			}
+		}
+	}
+}
+//在链表中插入
+bool insert(PNode pHead, int pos, int val)	//在pos前面插入val 
+{
+	int i = 0;
+	PNode p = pHead;
+
+	if (pos > length_list(pHead))
+	{
+		printf("插入的位置无效\n");
+		exit(-1);
+	}
+	//指针移位
+	while (nullptr != p && i < pos - 1)		//在pos前面插入  
+	{
+		i++;
+		p = p->pNext;
+	}
+	//
+	if (i > pos - 1 || pHead == nullptr)
+	{
+		printf("输入的位置或链表有误,插入失败");
+		return false;
+	}
+
+	PNode q = p->pNext;						//q是下一个节点 
+	PNode tNew = (PNode)malloc(sizeof(Node));
+	if (tNew == nullptr)
+	{
+		printf("动态内存分配失败!\n");
+		exit(-1);
+	}
+
+	tNew->pNext = q;
+	p->pNext = tNew;
+	tNew->data = val;
+	return true;
+}
+
+//删除链表中某位置的元素
+bool delete_list(PNode pHead, int pos)
+{
+	int i = 0;
+	PNode p = pHead;
+	while (p != nullptr && i < pos - 1)
+	{
+		i++;
+		p = p->pNext;
+	}
+	PNode q = p->pNext;
+	p->pNext = p->pNext->pNext;
+	free(q);
+	return true;
 }

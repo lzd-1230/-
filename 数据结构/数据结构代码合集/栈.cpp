@@ -1,13 +1,27 @@
+
 #include<stdio.h>
 #include<malloc.h>
 #include<stdlib.h>
 #include<stdbool.h>
+/**************************************
+一个程序如果需要同时使用两个相同数据类型的栈?(只用一个数组)
+	栈底在两头:栈顶往中间走
+	目的是:使数组的空间得到最大的利用
+	栈1为空:top1 == -1		栈2为空top2 == n
+	栈满:top1 == top2 + 1
 
+在数组栈的时候,top一样是指栈顶元素
+	top+1是下一个插入元素的下标
+
+链栈:没啥缺点
+
+递归:自己调用自己!
+**************************************/
 typedef struct Node
 {
 	int data;
-	struct Node* pNext;	
-}Node,*PNode;
+	struct Node* pNext;
+}Node, * PNode;
 
 //栈的结构体:约束从一个口进从一个口出 
 //!!注意区分栈的指针域是往前指的 
@@ -16,91 +30,105 @@ typedef struct Stack
 {
 	PNode ptop;
 	PNode pbottom;
-}stack,*pstack;
+}stack, * pstack;
 
 void init(pstack);				//初始化为空,使top和bottom指向同一个头结点 
-void push(pstack,int);			//压栈 
+void push(pstack, int);			//压栈 
 void travel(pstack);			//遍历 
-bool pop(pstack ,int* );		//出栈 
+bool pop(pstack, int*);		//出栈 
 
 int main()
 {
-	int val;				
+	int val;
 	stack s;
 	init(&s);
-	push(&s,1);				//因为只能放在栈顶的位置,相当于插入的位置固定的
-	push(&s,2);
-	push(&s,3);
-	push(&s,4);
-	push(&s,5);
-	if(pop(&s,&val))
+	push(&s, 1);				//因为只能放在栈顶的位置,相当于插入的位置固定的
+	push(&s, 2);
+	push(&s, 3);
+	push(&s, 4);
+	push(&s, 5);
+	if (pop(&s, &val))
 	{
-		printf("出栈的元素是%d\n",val);
+		printf("出栈的元素是%d\n", val);
 	}
-	else	printf("出栈失败\n"); 
-	travel(&s);			
+	else	printf("出栈失败\n");
+	travel(&s);
 	return 0;
-} 
+}
 //建立一个空的栈(使ptop和pbottom都指向一个头结点) 
 void init(pstack p)
 {
-	p->ptop=(PNode)malloc(sizeof(Node));	//新建节点 
-	if(nullptr==p->ptop)						 
+	p->ptop = (PNode)malloc(sizeof(Node));	//新建节点 
+
+	//假设指针为空说明分配失败
+	if (nullptr == p->ptop)
 	{
 		printf("动态内存分配失败");
-		exit(-1); 
+		exit(-1);
 	}
-	
+
 	else
 	{
-		p->pbottom=p->ptop;					//让ptop和pbottom的值相等 
-		p->ptop->pNext=nullptr;				//让ptop成为最上面的节点 
-	}	
+		p->pbottom = p->ptop;					//让ptop和pbottom的指向同一个地方 
+		p->ptop->pNext = nullptr;				//让ptop成为最上面的节点 
+	}
 }
+
 //压栈(每次压一个) 
-void push(pstack p,int val)
+void push(pstack p, int val)
 {
-	PNode pNew=(PNode)malloc(sizeof(Node));			//创建新节点 
-	pNew->data=val;									//data域赋值 
-	pNew->pNext=p->ptop;							//指针域赋值 
-	p->ptop=pNew;									//ptop的更新 
-} 
-//遍历 
+	PNode pNew = (PNode)malloc(sizeof(Node));			//创建新节点 
+	pNew->data = val;									//data域赋值 
+	pNew->pNext = p->ptop;							//指针域赋值 
+	p->ptop = pNew;									//ptop的更新 
+}
+
+
+/**************************************
+函数名:travel
+函数功能:遍历栈
+参数:栈的地址
+注:top->pnext指向下一个要插入的元素的位置
+**************************************/
 void travel(pstack p)
-{ 
-	PNode t=p->ptop;
-	while(t!=p->pbottom)
+{
+	PNode t = p->ptop;
+	while (t != p->pbottom)
 	{
-		printf("%4d",t->data);			//输出数据域 
-		t=t->pNext;						//t++ 
+		printf("%4d", t->data);			//输出数据域 
+		t = t->pNext;						//t++ 
 	}
 	printf("\n");
 	return;
 }
+
 //判度是否为空
 bool is_Empty(pstack p)
 {
-	if(p->pbottom==p->ptop)				//bottom和top是否相等 
+	if (p->pbottom == p->ptop)				//bottom和top是否相等 
 	{
 		printf("栈为空\n");
-		return true; 
-	}
-	else return false; 
-} 
-//出栈
-bool pop(pstack p ,int* pval )
-{
-	if(is_Empty(p))	return false;
-	else
-	{
-		PNode t=p->ptop;				//记录出栈元素地址,一会释放 
-		*pval=p->ptop->data; 			
-		p->ptop=p->ptop->pNext; 		//让ptop从最上面往下移一个 
-		free(t);						//但要记得free空间 
-		t=nullptr;	
 		return true;
 	}
-} 
+	else return false;
+}
+//出栈
+bool pop(pstack p, int* pval)
+{
+	if (is_Empty(p))	return false;
+	else
+	{
+		//记录出栈元素地址,一会释放
+		PNode t = p->ptop;
+		*pval = p->ptop->data;
+
+		p->ptop = p->ptop->pNext; 		//让ptop从最上面往下移一个 
+
+		free(t);						//但要记得free空间 
+		t = nullptr;
+		return true;
+	}
+}
 
 //栈的应用:计算器(网上代码) 
 

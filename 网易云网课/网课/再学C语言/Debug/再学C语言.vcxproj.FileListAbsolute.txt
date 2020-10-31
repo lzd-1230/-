@@ -1,0 +1,6 @@
+E:\文件集\C语言\C primer plus\网课\再学C语言\Debug\字符串.exe
+E:\文件集\C语言\C primer plus\网课\再学C语言\Debug\字符串.pdb
+E:\文件集\C语言\最近学习\网课\再学C语言\Debug\字符串.exe
+E:\文件集\C语言\最近学习\网课\再学C语言\Debug\字符串.pdb
+E:\文件集\C语言\网易云网课\网课\再学C语言\Debug\字符串.exe
+E:\文件集\C语言\网易云网课\网课\再学C语言\Debug\字符串.pdb

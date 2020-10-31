@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<string.h>
 #include <stdlib.h>
@@ -7,26 +6,29 @@
 ①哈希表的作用:没出现过的字符都是0,字符出现就会赋值为其字符下标+1(if第二次出现的更新的意义:远端(重复)数字的下一位)
 ②start初始化为0,每次更新为近端重复数字的下一位,再继续延伸滑动区间右端
 */
+
 //哈希+滑动(稍微复杂)
-//int lengthOfLongestSubstring(char* s) {
-//    int i, count = 0, start = 0, index[128] = { 0 }, max = 0;
-//    for (i = 0; s[i] != '\0'; i++)
-//    {
-//        if (index[s[i]] > start)
-//        {
-//            count = i - start;  //滑动区间长度
-//            if (count > max)
-//                max = count;
-//            start = index[s[i]]; //start理解成从哪一个字符开始计算字串长度,start的更新因为出现了重复,因此赋值为重复字符下一个字符的下标
-//        }
-//        index[s[i]] = i + 1;    //将这个字母的值设置的比start大,并且指向它下一个字符的地址,这样在它赢了之后给start赋值时start也自然就从下一个开始
-//    }
-//    count = i - start;
-//    return max > count ? max : count;
-//}
+#if 0
+int lengthOfLongestSubstring(char* s) {
+    int i, count = 0, start = 0, index[128] = { 0 }, max = 0;
+    for (i = 0; s[i] != '\0'; i++)
+    {
+        if (index[s[i]] > start)
+        {
+            count = i - start;  //滑动区间长度
+            if (count > max)
+                max = count;
+            start = index[s[i]]; //start理解成从哪一个字符开始计算字串长度,start的更新因为出现了重复,因此赋值为重复字符下一个字符的下标
+        }
+        index[s[i]] = i + 1;    //将这个字母的值设置的比start大,并且指向它下一个字符的地址,这样在它赢了之后给start赋值时start也自然就从下一个开始
+    }
+    count = i - start;
+    return max > count ? max : count;
+}
+#endif // 0
 
 //单纯滑动
-/*
+#if 0
 int lengthOfLongestSubstring(char* s) {
         int max = 0;
         int i = 0;
@@ -46,9 +48,10 @@ int lengthOfLongestSubstring(char* s) {
         return max;
     }
 };
-*/
+#endif
 
 //小鹏
+#if 0
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -65,7 +68,7 @@ int allUnique(char* s, int i, int j)
 {
     char flag[128]; //ASC码只有0-127
     int ret = 0;
-    memset(flag, 0, sizeof(flag)); //复制为0;
+    memset(flag, 0, sizeof(flag)); //赋值为0;
     for (; i <= j; i++)
     {
         if (flag[*(s + i)])
@@ -175,6 +178,8 @@ int main()
     printf("滑动窗口（小姐姐）：%d：\n", lengthOfLongestSubstring2(s));//pointer,p
     return 0;
 }
+#endif
+
 //知乎滑动窗口模板伪代码
 //初始化窗口端点L，R，一般L为0，R为1
 //初始化最优值

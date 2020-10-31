@@ -1,0 +1,7 @@
+﻿D:\Software\visual studio\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(结构体.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  f.cpp
+E:\文件集\C语言\最近学习\网课\结构体\f.cpp(174,9): warning C4477: “scanf”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“int”
+E:\文件集\C语言\最近学习\网课\结构体\f.cpp(175,10): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“int *”
+E:\文件集\C语言\最近学习\网课\结构体\f.cpp(184,9): warning C4477: “scanf”: 格式字符串“%d”需要类型“int *”的参数，但可变参数 1 拥有了类型“char *”
+E:\文件集\C语言\最近学习\网课\结构体\f.cpp(184,9): message : 请考虑在格式字符串中使用“%hhd”
+  结构体.vcxproj -> E:\文件集\C语言\最近学习\网课\再学C语言\Debug\学生信息.exe

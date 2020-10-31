@@ -48,5 +48,8 @@
     <ClCompile Include="二叉排序树.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="郝斌知识点.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

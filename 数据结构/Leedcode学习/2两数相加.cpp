@@ -1,13 +1,15 @@
 #include <cstddef>
-#include<malloc.pTail>
-/*
+#include<malloc.h>
+
+//自己的
+#if 0
 struct ListNode
 {
 	int val;
 	struct ListNode* next;
 };
 
-//自己的
+
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
 {	//创建头结点
 	struct ListNode* pHead = (struct ListNode*)malloc(sizeof(struct ListNode));
@@ -61,13 +63,14 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
 	}
 	return pHead->next;
 }
-*/
+#endif
 //C++版本解法一
 /*
 获取两个链表所对应的长度
 在较短的链表末尾补零
 对齐相加考虑进位
 */
+#if 0
 struct ListNode
 {
     int val;
@@ -137,7 +140,10 @@ public:
         return l3->next;
     }
 };
+#endif
+
 //C++ 版本二
+#if 0
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
@@ -177,6 +183,8 @@ public:
         return head->next;
     }
 };
+#endif
+
 
 
 
