@@ -1,3 +1,0 @@
-﻿D:\Software\visual studio\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(再学C语言.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  字符串和指针常量.cpp
-  再学C语言.vcxproj -> E:\文件集\C语言\C primer plus\网课\再学C语言\Debug\字符串.exe
